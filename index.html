@@ -68,6 +68,70 @@
     .card{grid-template-columns:56px 1fr;}
     .card .imp{grid-column:2;justify-self:start;margin-top:2px}
   }
+
+  /* ---- week bar ---- */
+  .weekbar{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:10px 0 4px}
+  .wb-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .wb-month{font-size:14px;font-weight:800;letter-spacing:.2px}
+  .wb-actions{display:flex;gap:6px}
+  .wb-btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:5px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+  .wb-btn:hover{border-color:var(--accent2);color:var(--text)}
+  .wb-strip{display:flex;align-items:stretch;gap:8px}
+  .wb-nav{flex:0 0 auto;width:34px;background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:9px;font-size:18px;line-height:1;cursor:pointer}
+  .wb-nav:hover{border-color:var(--accent2)}
+  .wb-days{flex:1;display:grid;grid-template-columns:repeat(7,1fr);gap:8px;min-width:0}
+  .daytab{position:relative;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 4px;cursor:pointer;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:2px;transition:.12s}
+  .daytab:hover{border-color:var(--accent2)}
+  .daytab .dt-wd{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.3px}
+  .daytab .dt-dt{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+  .daytab .dt-n{position:absolute;top:5px;right:6px;font-size:9px;font-weight:800;background:var(--accent2);color:#fff;border-radius:9px;min-width:15px;height:15px;line-height:15px;text-align:center;padding:0 3px}
+  .daytab.today{border-color:#1c5738;background:#0e1f18}
+  .daytab.today .dt-dt{color:var(--green)}
+  .daytab.sel{border-color:var(--accent2);background:#12233d;box-shadow:0 0 0 1px var(--accent2) inset}
+  .daytab.wknd{opacity:.5}
+  /* ---- week overview ---- */
+  .overview{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:12px}
+  .ov-col{background:var(--panel);border:1px solid var(--line);border-radius:11px;min-height:120px;cursor:pointer;overflow:hidden;transition:.12s}
+  .ov-col:hover{border-color:var(--accent2)}
+  .ov-col.today{border-color:#1c5738}
+  .ov-col.wknd{opacity:.6}
+  .ov-head{padding:8px 9px;border-bottom:1px solid var(--line);background:var(--panel2)}
+  .ov-head .ov-wd{display:block;font-size:11px;color:var(--muted);font-weight:700}
+  .ov-head .ov-dt{font-size:13px;font-weight:800}
+  .ov-col.today .ov-head .ov-dt{color:var(--green)}
+  .ov-body{padding:7px}
+  .ov-item{display:flex;align-items:center;gap:5px;background:var(--panel2);border:1px solid var(--line);border-left-width:3px;border-radius:7px;padding:4px 6px;margin-bottom:5px}
+  .ov-item:last-child{margin-bottom:0}
+  .ov-item .ov-t{color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:10.5px}
+  .ov-item .ov-e{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;font-size:11.5px}
+  .ov-item .ov-macro{font-size:8.5px;font-weight:900;color:#6cb6ff;border:1px solid #1c405a;border-radius:4px;padding:0 3px}
+  .ov-empty{color:#3a4759;text-align:center;font-size:12px;padding:16px 0}
+  /* ---- day detail ---- */
+  .dd-head{display:flex;align-items:center;gap:12px;margin:18px 0 6px}
+  .dd-head .dd-wd{color:var(--muted);font-size:13px;font-weight:700}
+  .dd-head .dd-date{font-size:18px;font-weight:800}
+  .dd-head .cd{margin-left:auto;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;background:var(--chip);border:1px solid var(--line);color:var(--muted)}
+  .dd-sec{margin:16px 0}
+  .dd-sectitle{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent2);margin:0 0 7px;display:flex;align-items:center;gap:8px}
+  .dd-cnt{font-size:10px;color:var(--muted);background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:1px 7px;font-weight:700}
+  .tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:11px}
+  .dd-tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:660px}
+  .dd-tbl th{text-align:left;color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;padding:9px 11px;background:var(--panel2);border-bottom:1px solid var(--line);white-space:nowrap}
+  .dd-tbl td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  .dd-tbl tr:last-child td{border-bottom:none}
+  .dd-tbl tbody tr:hover td{background:var(--panel2)}
+  .dd-tbl .c-time{font-weight:800;color:var(--text);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .dd-tbl .c-ev{font-weight:700;white-space:nowrap}
+  .dd-tbl .c-x{color:var(--muted)}
+  .dd-tbl .c-note{color:var(--muted);min-width:180px}
+  @media (max-width:820px){
+    .daytab{padding:7px 2px}
+    .daytab .dt-wd{font-size:9.5px}
+    .daytab .dt-dt{font-size:11.5px}
+    .daytab .dt-n{min-width:13px;height:13px;line-height:13px;font-size:8px}
+    .overview{grid-template-columns:1fr;gap:6px}
+    .ov-col{min-height:0}
+  }
 </style>
 </head>
 <body>
@@ -98,9 +162,9 @@
       <option value="">All status</option>
       <option>Confirmed</option><option>Wait</option>
     </select>
-    <label class="chk"><input type="checkbox" id="upcomingOnly"> Upcoming only</label>
   </div>
 
+  <div id="weekbar" class="weekbar"></div>
   <div id="list"></div>
 
   <footer id="footer"></footer>
@@ -132,30 +196,210 @@ const DATA_URL = "https://api.onedrive.com/v1.0/shares/u!aHR0cHM6Ly8xZHJ2Lm1zL3g
 
 /* Bundled fallback = snapshot of the Excel at build time (matches the "Events" sheet). */
 const SAMPLE = [
-  {date:"2026-07-22", session:"AMC",  timeET:"",        status:"Confirmed", event:"GOOGL",              category:"E",      tickers:"", notes:"Alphabet Q2 — AI cloud/ads vs capex"},
-  {date:"2026-07-22", session:"Call", timeET:"4:30 PM", status:"Confirmed", event:"GOOGL cc",           category:"E",      tickers:"", notes:"Earnings call 1:30pm PT (abc.xyz/investor)"},
-  {date:"2026-07-23", session:"AMC",  timeET:"",        status:"Confirmed", event:"INTC",               category:"E",      tickers:"", notes:"Intel Q2"},
-  {date:"2026-07-23", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"INTC cc",            category:"E",      tickers:"", notes:"Earnings call 2:00pm PT (intc.com)"},
-  {date:"2026-07-28", session:"",     timeET:"",        status:"Confirmed", event:"FOMC meeting (Day 1)",category:"Fed / Rates",   tickers:"", notes:"Two-day meeting; no SEP this meeting"},
-  {date:"2026-07-29", session:"",     timeET:"2:00 PM", status:"Confirmed", event:"FOMC rate decision",  category:"Fed / Rates",   tickers:"", notes:"Decision 2:00pm ET; press conf. 2:30pm ET"},
-  {date:"2026-07-29", session:"AMC",  timeET:"",        status:"Confirmed", event:"MSFT",               category:"E",      tickers:"", notes:"Microsoft FY26 Q4 — same day as FOMC"},
-  {date:"2026-07-29", session:"Call", timeET:"5:30 PM", status:"Confirmed", event:"MSFT cc",            category:"E",      tickers:"", notes:"Earnings call 2:30pm PT (microsoft.com/investor)"},
-  {date:"2026-07-29", session:"AMC",  timeET:"",        status:"Confirmed", event:"META",               category:"E",      tickers:"", notes:"Meta Q2"},
-  {date:"2026-07-29", session:"Call", timeET:"4:30 PM", status:"Confirmed", event:"META cc",            category:"E",      tickers:"", notes:"Earnings call 1:30pm PT"},
-  {date:"2026-07-30", session:"",     timeET:"8:30 AM", status:"Confirmed", event:"Q2 GDP (advance)",    category:"Economic Data", tickers:"", notes:"BEA release 8:30am ET"},
-  {date:"2026-07-30", session:"AMC",  timeET:"",        status:"Confirmed", event:"AAPL",               category:"E",      tickers:"", notes:"Apple FY26 Q3"},
-  {date:"2026-07-30", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AAPL cc",            category:"E",      tickers:"", notes:"Earnings call 2:00pm PT"},
-  {date:"2026-07-30", session:"AMC",  timeET:"",        status:"Confirmed", event:"AMZN",               category:"E",      tickers:"", notes:"Amazon Q2"},
-  {date:"2026-07-30", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AMZN cc",            category:"E",      tickers:"", notes:"Earnings call 2:00pm PT"},
-  {date:"2026-07-31", session:"",     timeET:"8:30 AM", status:"Wait",      event:"June PCE inflation",  category:"Economic Data", tickers:"", notes:"Fed's preferred gauge (BEA PI&O). Confirm date: 7/30 or 7/31"},
-  {date:"2026-08-03", session:"AMC",  timeET:"",        status:"Confirmed", event:"PLTR",               category:"E",             tickers:"", notes:"Palantir Q2. Call time TBD"},
-  {date:"2026-08-04", session:"AMC",  timeET:"",        status:"Confirmed", event:"AMD",                category:"E",             tickers:"", notes:"AMD Q2"},
-  {date:"2026-08-04", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AMD cc",             category:"E",             tickers:"", notes:"Earnings call 2:00pm PT (ir.amd.com)"},
-  {date:"2026-08-05", session:"BMO",  timeET:"",        status:"Confirmed", event:"DIS",                category:"E",             tickers:"", notes:"Disney FQ3 - reports before open"},
-  {date:"2026-08-05", session:"Call", timeET:"8:30 AM", status:"Confirmed", event:"DIS cc",             category:"E",             tickers:"", notes:"Earnings call 8:30am ET (before open)"},
-  {date:"2026-08-07", session:"",     timeET:"8:30 AM", status:"Confirmed", event:"July Jobs Report (NFP)", category:"Economic Data", tickers:"", notes:"BLS Employment Situation, 8:30am ET"},
-  {date:"2026-08-12", session:"",     timeET:"8:30 AM", status:"Confirmed", event:"July CPI",            category:"Economic Data", tickers:"", notes:"BLS CPI, 8:30am ET"},
-  {date:"2026-08-13", session:"",     timeET:"8:30 AM", status:"Confirmed", event:"July PPI",            category:"Economic Data", tickers:"", notes:"BLS PPI, 8:30am ET"},
+  {date:"2026-07-21", session:"", timeET:"", status:"Confirmed", event:"COF", category:"E", tickers:"", notes:"Implied move 4.93%"},
+  {date:"2026-07-21", session:"", timeET:"", status:"Confirmed", event:"DHR", category:"E", tickers:"", notes:"Implied move 5.14%"},
+  {date:"2026-07-21", session:"", timeET:"", status:"Confirmed", event:"MMM", category:"E", tickers:"", notes:"Implied move 5.23%"},
+  {date:"2026-07-21", session:"", timeET:"", status:"Confirmed", event:"NOC", category:"E", tickers:"", notes:"Implied move 8.52%"},
+  {date:"2026-07-21", session:"", timeET:"", status:"Confirmed", event:"SCHW", category:"E", tickers:"", notes:"Implied move 4.31%"},
+  {date:"2026-07-22", session:"AMC", timeET:"", status:"Confirmed", event:"GOOGL", category:"E", tickers:"", notes:"Alphabet Q2 — AI cloud/ads vs capex"},
+  {date:"2026-07-22", session:"Call", timeET:"4:30 PM", status:"Confirmed", event:"GOOGL cc", category:"E", tickers:"", notes:"Earnings call 1:30pm PT (abc.xyz/investor)"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"CME", category:"E", tickers:"", notes:"Implied move 4.25%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"CSX", category:"E", tickers:"", notes:"Implied move 4.34%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"GEV", category:"E", tickers:"", notes:"Implied move 9.51%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"GOOG", category:"E", tickers:"", notes:"Implied move 5.87%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"IBM", category:"E", tickers:"", notes:"Implied move 6.65%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"KMI", category:"E", tickers:"", notes:"Implied move 3.13%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"MCO", category:"E", tickers:"", notes:"Implied move 6.85%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"NOW", category:"E", tickers:"", notes:"Implied move 10.83%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"PM", category:"E", tickers:"", notes:"Implied move 5.46%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"T", category:"E", tickers:"", notes:"Implied move 4.49%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"TSLA", category:"E", tickers:"", notes:"Implied move 6.17%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"TXN", category:"E", tickers:"", notes:"Implied move 9.62%"},
+  {date:"2026-07-22", session:"", timeET:"", status:"Confirmed", event:"URI", category:"E", tickers:"", notes:"Implied move 7.29%"},
+  {date:"2026-07-23", session:"AMC", timeET:"", status:"Confirmed", event:"INTC", category:"E", tickers:"", notes:"Intel Q2"},
+  {date:"2026-07-23", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"INTC cc", category:"E", tickers:"", notes:"Earnings call 2:00pm PT (intc.com)"},
+  {date:"2026-07-23", session:"", timeET:"", status:"Confirmed", event:"BX", category:"E", tickers:"", notes:"Implied move 5.11%"},
+  {date:"2026-07-23", session:"", timeET:"", status:"Confirmed", event:"CMCSA", category:"E", tickers:"", notes:"Implied move 6.28%"},
+  {date:"2026-07-23", session:"", timeET:"", status:"Confirmed", event:"DLR", category:"E", tickers:"", notes:"Implied move 4.60%"},
+  {date:"2026-07-23", session:"", timeET:"", status:"Confirmed", event:"LMT", category:"E", tickers:"", notes:"Implied move 5.40%"},
+  {date:"2026-07-23", session:"", timeET:"", status:"Confirmed", event:"NDAQ", category:"E", tickers:"", notes:"Implied move 4.60%"},
+  {date:"2026-07-23", session:"", timeET:"", status:"Confirmed", event:"NEM", category:"E", tickers:"", notes:"Implied move 6.07%"},
+  {date:"2026-07-23", session:"", timeET:"", status:"Confirmed", event:"NSC", category:"E", tickers:"", notes:"Implied move 6.44%"},
+  {date:"2026-07-23", session:"", timeET:"", status:"Confirmed", event:"RTX", category:"E", tickers:"", notes:"Implied move 4.75%"},
+  {date:"2026-07-23", session:"", timeET:"", status:"Confirmed", event:"TMO", category:"E", tickers:"", notes:"Implied move 5.92%"},
+  {date:"2026-07-23", session:"", timeET:"", status:"Confirmed", event:"UNP", category:"E", tickers:"", notes:"Implied move 4.06%"},
+  {date:"2026-07-24", session:"", timeET:"", status:"Confirmed", event:"AXP", category:"E", tickers:"", notes:"Implied move 5.22%"},
+  {date:"2026-07-24", session:"", timeET:"", status:"Confirmed", event:"HCA", category:"E", tickers:"", notes:"Implied move 9.08%"},
+  {date:"2026-07-24", session:"", timeET:"", status:"Confirmed", event:"NEE", category:"E", tickers:"", notes:"Implied move 4.43%"},
+  {date:"2026-07-24", session:"", timeET:"", status:"Confirmed", event:"VZ", category:"E", tickers:"", notes:"Implied move 4.73%"},
+  {date:"2026-07-27", session:"", timeET:"", status:"Confirmed", event:"CDNS", category:"E", tickers:"", notes:"Implied move 11.47%"},
+  {date:"2026-07-27", session:"", timeET:"", status:"Confirmed", event:"NUE", category:"E", tickers:"", notes:"Implied move 8.98%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"FOMC meeting (Day 1)", category:"Fed / Rates", tickers:"", notes:"Two-day meeting; no SEP this meeting"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"BA", category:"E", tickers:"", notes:"Implied move 6.23%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"BE", category:"E", tickers:"", notes:"Implied move 28.88%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"CARR", category:"E", tickers:"", notes:"Implied move 7.36%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"ECL", category:"E", tickers:"", notes:"Implied move 6.66%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"F", category:"E", tickers:"", notes:"Implied move 7.25%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"GLW", category:"E", tickers:"", notes:"Implied move 14.49%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"HLT", category:"E", tickers:"", notes:"Implied move 5.05%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"ITW", category:"E", tickers:"", notes:"Implied move 6.07%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"KLAC", category:"E", tickers:"", notes:"Implied move 20.92%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"KO", category:"E", tickers:"", notes:"Implied move 4.61%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"MDLZ", category:"E", tickers:"", notes:"Implied move 4.50%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"PCAR", category:"E", tickers:"", notes:"Implied move 7.99%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"PYPL", category:"E", tickers:"", notes:"Implied move 6.61%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"SHW", category:"E", tickers:"", notes:"Implied move 7.04%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"SPGI", category:"E", tickers:"", notes:"Implied move 7.15%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"TER", category:"E", tickers:"", notes:"Implied move 18.33%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"UPS", category:"E", tickers:"", notes:"Implied move 6.60%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"V", category:"E", tickers:"", notes:"Implied move 4.39%"},
+  {date:"2026-07-28", session:"", timeET:"", status:"Confirmed", event:"WM", category:"E", tickers:"", notes:"Implied move 6.00%"},
+  {date:"2026-07-29", session:"AMC", timeET:"", status:"Confirmed", event:"MSFT", category:"E", tickers:"", notes:"Microsoft FY26 Q4 — same day as FOMC"},
+  {date:"2026-07-29", session:"AMC", timeET:"", status:"Confirmed", event:"META", category:"E", tickers:"", notes:"Meta Q2"},
+  {date:"2026-07-29", session:"", timeET:"2:00 PM", status:"Confirmed", event:"FOMC rate decision", category:"Fed / Rates", tickers:"", notes:"Decision 2:00pm ET; press conf. 2:30pm ET"},
+  {date:"2026-07-29", session:"Call", timeET:"4:30 PM", status:"Confirmed", event:"META cc", category:"E", tickers:"", notes:"Earnings call 1:30pm PT"},
+  {date:"2026-07-29", session:"Call", timeET:"5:30 PM", status:"Confirmed", event:"MSFT cc", category:"E", tickers:"", notes:"Earnings call 2:30pm PT (microsoft.com/investor)"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"ADP", category:"E", tickers:"", notes:"Implied move 5.47%"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"APH", category:"E", tickers:"", notes:"Implied move 13.04%"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"BSX", category:"E", tickers:"", notes:"Implied move 9.72%"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"ETR", category:"E", tickers:"", notes:"Implied move 6.59%"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"FTNT", category:"E", tickers:"", notes:"Implied move 13.43%"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"GD", category:"E", tickers:"", notes:"Implied move 4.59%"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"HOOD", category:"E", tickers:"", notes:"Implied move 12.83%"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"LRCX", category:"E", tickers:"", notes:"Implied move 15.17%"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"ORLY", category:"E", tickers:"", notes:"Implied move 8.18%"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"PG", category:"E", tickers:"", notes:"Implied move 4.63%"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"QCOM", category:"E", tickers:"", notes:"Implied move 11.81%"},
+  {date:"2026-07-29", session:"", timeET:"", status:"Confirmed", event:"VRT", category:"E", tickers:"", notes:"Implied move 13.45%"},
+  {date:"2026-07-30", session:"AMC", timeET:"", status:"Confirmed", event:"AAPL", category:"E", tickers:"", notes:"Apple FY26 Q3"},
+  {date:"2026-07-30", session:"AMC", timeET:"", status:"Confirmed", event:"AMZN", category:"E", tickers:"", notes:"Amazon Q2"},
+  {date:"2026-07-30", session:"", timeET:"8:30 AM", status:"Confirmed", event:"Q2 GDP (advance)", category:"Economic Data", tickers:"", notes:"BEA release 8:30am ET"},
+  {date:"2026-07-30", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AAPL cc", category:"E", tickers:"", notes:"Earnings call 2:00pm PT"},
+  {date:"2026-07-30", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AMZN cc", category:"E", tickers:"", notes:"Earnings call 2:00pm PT"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"AEP", category:"E", tickers:"", notes:"Implied move 5.81%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"APD", category:"E", tickers:"", notes:"Implied move 6.75%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"BMY", category:"E", tickers:"", notes:"Implied move 5.45%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"CI", category:"E", tickers:"", notes:"Implied move 6.68%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"CTVA", category:"E", tickers:"", notes:"Implied move 7.80%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"EPD", category:"E", tickers:"", notes:"Implied move 4.25%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"KKR", category:"E", tickers:"", notes:"Implied move 7.45%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"MA", category:"E", tickers:"", notes:"Implied move 5.01%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"MO", category:"E", tickers:"", notes:"Implied move 5.21%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"MPWR", category:"E", tickers:"", notes:"Implied move 19.71%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"REGN", category:"E", tickers:"", notes:"Implied move 6.49%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"SO", category:"E", tickers:"", notes:"Implied move 3.27%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"SYK", category:"E", tickers:"", notes:"Implied move 8.39%"},
+  {date:"2026-07-30", session:"", timeET:"", status:"Confirmed", event:"VLO", category:"E", tickers:"", notes:"Implied move 7.05%"},
+  {date:"2026-07-31", session:"", timeET:"8:30 AM", status:"Wait", event:"June PCE inflation", category:"Economic Data", tickers:"", notes:"Fed's preferred gauge (BEA PI&O). Confirm date: 7/30 or 7/31"},
+  {date:"2026-07-31", session:"", timeET:"", status:"Confirmed", event:"ABBV", category:"E", tickers:"", notes:"Implied move 5.68%"},
+  {date:"2026-07-31", session:"", timeET:"", status:"Confirmed", event:"CL", category:"E", tickers:"", notes:"Implied move 4.97%"},
+  {date:"2026-07-31", session:"", timeET:"", status:"Confirmed", event:"CVX", category:"E", tickers:"", notes:"Implied move 5.41%"},
+  {date:"2026-07-31", session:"", timeET:"", status:"Confirmed", event:"D", category:"E", tickers:"", notes:"Implied move 5.28%"},
+  {date:"2026-07-31", session:"", timeET:"", status:"Confirmed", event:"FCX", category:"E", tickers:"", notes:"Implied move 11.25%"},
+  {date:"2026-07-31", session:"", timeET:"", status:"Confirmed", event:"FIX", category:"E", tickers:"", notes:"Implied move 17.21%"},
+  {date:"2026-07-31", session:"", timeET:"", status:"Confirmed", event:"PS", category:"E", tickers:"", notes:"Implied move 16.28% (BZ imp 4)"},
+  {date:"2026-07-31", session:"", timeET:"", status:"Confirmed", event:"SCCO", category:"E", tickers:"", notes:"Implied move 11.13%"},
+  {date:"2026-07-31", session:"", timeET:"", status:"Confirmed", event:"XOM", category:"E", tickers:"", notes:"Implied move 5.65%"},
+  {date:"2026-08-03", session:"AMC", timeET:"", status:"Confirmed", event:"PLTR", category:"E", tickers:"", notes:"Palantir Q2. Call time TBD"},
+  {date:"2026-08-03", session:"", timeET:"", status:"Confirmed", event:"MAR", category:"E", tickers:"", notes:"Implied move 6.09%"},
+  {date:"2026-08-03", session:"", timeET:"", status:"Confirmed", event:"OKE", category:"E", tickers:"", notes:"Implied move 7.27%"},
+  {date:"2026-08-03", session:"", timeET:"", status:"Confirmed", event:"WMB", category:"E", tickers:"", notes:"Implied move 5.57%"},
+  {date:"2026-08-04", session:"AMC", timeET:"", status:"Confirmed", event:"AMD", category:"E", tickers:"", notes:"AMD Q2"},
+  {date:"2026-08-04", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AMD cc", category:"E", tickers:"", notes:"Earnings call 2:00pm PT (ir.amd.com)"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"ALAB", category:"E", tickers:"", notes:"Implied move 23.45%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"AMGN", category:"E", tickers:"", notes:"Implied move 6.30%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"ANET", category:"E", tickers:"", notes:"Implied move 13.99%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"APO", category:"E", tickers:"", notes:"Implied move 8.68%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"CAT", category:"E", tickers:"", notes:"Implied move 10.17%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"CMI", category:"E", tickers:"", notes:"Implied move 10.55%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"DUK", category:"E", tickers:"", notes:"Implied move 4.58%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"DVN", category:"E", tickers:"", notes:"Implied move 7.25%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"EMR", category:"E", tickers:"", notes:"Implied move 7.15%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"EOG", category:"E", tickers:"", notes:"Implied move 6.57%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"GWW", category:"E", tickers:"", notes:"Implied move 6.66%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"MRK", category:"E", tickers:"", notes:"Implied move 6.39%"},
+  {date:"2026-08-04", session:"", timeET:"", status:"Confirmed", event:"PFE", category:"E", tickers:"", notes:"Implied move 4.67%"},
+  {date:"2026-08-05", session:"BMO", timeET:"", status:"Confirmed", event:"DIS", category:"E", tickers:"", notes:"Disney FQ3 - reports before open"},
+  {date:"2026-08-05", session:"Call", timeET:"8:30 AM", status:"Confirmed", event:"DIS cc", category:"E", tickers:"", notes:"Earnings call 8:30am ET (before open)"},
+  {date:"2026-08-05", session:"", timeET:"", status:"Wait", event:"APP", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-05", session:"", timeET:"", status:"Wait", event:"COR", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-05", session:"", timeET:"", status:"Wait", event:"MCD", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-05", session:"", timeET:"", status:"Wait", event:"MCK", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-05", session:"", timeET:"", status:"Wait", event:"MET", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-05", session:"", timeET:"", status:"Wait", event:"O", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-05", session:"", timeET:"", status:"Wait", event:"OXY", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-05", session:"", timeET:"", status:"Wait", event:"ROK", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-05", session:"", timeET:"", status:"Wait", event:"SNDK", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-05", session:"", timeET:"", status:"Wait", event:"UBER", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-05", session:"", timeET:"", status:"Wait", event:"WDC", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"ABNB", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"AFL", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"CEG", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"DDOG", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"GILD", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"HWM", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"LLY", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"LNG", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"MNST", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"MSI", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"NET", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"PH", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"RSG", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-06", session:"", timeET:"", status:"Wait", event:"WBD", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-07", session:"", timeET:"8:30 AM", status:"Confirmed", event:"July Jobs Report (NFP)", category:"Economic Data", tickers:"", notes:"BLS Employment Situation, 8:30am ET"},
+  {date:"2026-08-07", session:"", timeET:"", status:"Wait", event:"VST", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-10", session:"", timeET:"", status:"Wait", event:"SPG", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-11", session:"", timeET:"", status:"Wait", event:"CAH", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-11", session:"", timeET:"", status:"Wait", event:"LITE", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-12", session:"", timeET:"8:30 AM", status:"Confirmed", event:"July CPI", category:"Economic Data", tickers:"", notes:"BLS CPI, 8:30am ET"},
+  {date:"2026-08-12", session:"", timeET:"", status:"Wait", event:"COHR", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-12", session:"", timeET:"", status:"Wait", event:"CSCO", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-12", session:"", timeET:"", status:"Wait", event:"PS", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-13", session:"", timeET:"8:30 AM", status:"Confirmed", event:"July PPI", category:"Economic Data", tickers:"", notes:"BLS PPI, 8:30am ET"},
+  {date:"2026-08-13", session:"", timeET:"", status:"Wait", event:"AMAT", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-13", session:"", timeET:"", status:"Wait", event:"DE", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-13", session:"", timeET:"", status:"Wait", event:"TPR", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-17", session:"", timeET:"", status:"Wait", event:"PANW", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-17", session:"", timeET:"", status:"Wait", event:"SPCX", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-18", session:"", timeET:"", status:"Wait", event:"HD", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-18", session:"", timeET:"", status:"Wait", event:"JKHY", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-18", session:"", timeET:"", status:"Wait", event:"KEYS", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-19", session:"", timeET:"", status:"Wait", event:"ADI", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-19", session:"", timeET:"", status:"Wait", event:"EL", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-19", session:"", timeET:"", status:"Wait", event:"LOW", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-19", session:"", timeET:"", status:"Wait", event:"NDSN", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-19", session:"", timeET:"", status:"Wait", event:"P", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-19", session:"", timeET:"", status:"Wait", event:"TGT", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-19", session:"", timeET:"", status:"Wait", event:"TJX", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-20", session:"", timeET:"", status:"Wait", event:"INTU", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-20", session:"", timeET:"", status:"Wait", event:"ROST", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-20", session:"", timeET:"", status:"Wait", event:"WDAY", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-20", session:"", timeET:"", status:"Wait", event:"WMT", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-20", session:"", timeET:"", status:"Wait", event:"ZM", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-21", session:"", timeET:"", status:"Wait", event:"BJ", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-21", session:"", timeET:"", status:"Wait", event:"UI", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-24", session:"", timeET:"", status:"Wait", event:"SMTC", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-25", session:"", timeET:"", status:"Wait", event:"MDB", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-25", session:"", timeET:"", status:"Wait", event:"OKTA", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-26", session:"", timeET:"", status:"Wait", event:"A", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-26", session:"", timeET:"", status:"Wait", event:"COO", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-26", session:"", timeET:"", status:"Wait", event:"CRWD", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-26", session:"", timeET:"", status:"Wait", event:"DCI", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-26", session:"", timeET:"", status:"Wait", event:"FIVE", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-26", session:"", timeET:"", status:"Wait", event:"NTNX", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-26", session:"", timeET:"", status:"Wait", event:"NVDA", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-26", session:"", timeET:"", status:"Wait", event:"SNOW", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-26", session:"", timeET:"", status:"Wait", event:"VEEV", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-26", session:"", timeET:"", status:"Wait", event:"WSM", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-27", session:"", timeET:"", status:"Wait", event:"BBY", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-27", session:"", timeET:"", status:"Wait", event:"BF/B", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-27", session:"", timeET:"", status:"Wait", event:"BURL", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-27", session:"", timeET:"", status:"Wait", event:"DELL", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-27", session:"", timeET:"", status:"Wait", event:"DG", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-27", session:"", timeET:"", status:"Wait", event:"DKS", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-27", session:"", timeET:"", status:"Wait", event:"HRL", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
+  {date:"2026-08-27", session:"", timeET:"", status:"Wait", event:"MRVL", category:"E", tickers:"", notes:"Est. date; confirm via IR"},
+  {date:"2026-08-27", session:"", timeET:"", status:"Wait", event:"ULTA", category:"E", tickers:"", notes:"Est. date; confirm via IR (BZ imp 4)"},
 ];
 
 const CAT_COLORS = {
@@ -259,15 +503,13 @@ function currentFilters(){
     q: document.getElementById("q").value.trim().toLowerCase(),
     cat: document.getElementById("catSel").value,
     status: document.getElementById("statusSel").value,
-    up: document.getElementById("upcomingOnly").checked,
   };
 }
 function applyFilters(list){
-  const f=currentFilters(); const t0=today0();
+  const f=currentFilters();
   return list.filter(e=>{
     if(f.cat && e.category!==f.cat) return false;
     if(f.status && e.status!==f.status) return false;
-    if(f.up && daysBetween(parseD(e.date),t0)<0) return false;
     if(f.q){
       const hay=(e.event+" "+e.tickers+" "+e.notes+" "+e.category+" "+e.reaction+" "+e.expected+" "+e.actual).toLowerCase();
       if(!hay.includes(f.q)) return false;
@@ -312,46 +554,110 @@ function mins(e){                     // minutes-since-midnight for chronologica
   return 99999;                        // no time -> end of that day
 }
 
+/* ---------------- week / day views ---------------- */
+let weekStart=null, selectedDay=null, VIEW=[];
+const WDS=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+const WDL=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+function mondayOf(d){ const x=new Date(d); x.setHours(0,0,0,0); const w=(x.getDay()+6)%7; x.setDate(x.getDate()-w); return x; }
+function addDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
+function iso(d){ return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
+function sessLabel(s){ s=(s||"").toUpperCase(); return ({BMO:"Pre-open",AMC:"After close",CALL:"Call"})[s]||s||""; }
+function initWeek(){
+  const t=today0(); let ws=mondayOf(t);
+  const inWk=d=>{ const a=iso(ws), b=iso(addDays(ws,6)); return d>=a&&d<=b; };
+  if(!VIEW.some(e=>inWk(e.date))){
+    const up=VIEW.map(e=>e.date).filter(d=>d>=iso(t)).sort();
+    if(up.length) ws=mondayOf(parseD(up[0]));
+    else { const all=VIEW.map(e=>e.date).sort(); if(all.length) ws=mondayOf(parseD(all[all.length-1])); }
+  }
+  weekStart=ws; selectedDay=null;
+}
 function render(){
+  VIEW=applyFilters(EVENTS);
+  if(!weekStart) initWeek();
   renderKpis(EVENTS);
-  const list=applyFilters(EVENTS).sort((a,b)=> a.date.localeCompare(b.date) || mins(a)-mins(b));
+  renderWeekBar();
   const box=document.getElementById("list");
-  if(!list.length){ box.innerHTML='<div class="empty">No events match your filters.</div>'; return; }
-  const groups={}; list.forEach(e=>{ (groups[e.date]=groups[e.date]||[]).push(e); });
-  let html="";
-  Object.keys(groups).sort().forEach(date=>{
-    const d=parseD(date), cd=countdown(date);
-    html+=`<div class="daygroup"><div class="dayhead">
-      <span class="d">${prettyDate(date)}</span>
-      <span class="wd">${WD[d.getDay()]}</span>
-      <span class="cd ${cd.cls}">${cd.t}</span></div>`;
-    groups[date].forEach(e=>{
-      const col=catColor(e.category);
-      const details=[];
-      if(e.expected) details.push(`<span><b>Expected:</b> ${esc(e.expected)}</span>`);
-      if(e.actual)   details.push(`<span><b>Actual:</b> ${esc(e.actual)}</span>`);
-      if(e.reaction) details.push(`<span><b>Reaction:</b> ${esc(e.reaction)}</span>`);
-      if(e.notes)    details.push(`<span>${esc(e.notes)}</span>`);
-      const timeCell = e.timeET
-        ? `<span class="et">${esc(e.timeET)}</span>${e.session?`<span class="sess">${esc(e.session)}</span>`:""}`
-        : (e.session?`<span class="et">${esc(e.session)}</span>`:"");
-      html+=`<div class="card" style="border-left-color:${col.edge}">
-        <div class="time">${timeCell}</div>
-        <div class="body">
-          <div class="title">${esc(e.event)}</div>
-          <div class="meta">
-            <span class="pill" style="color:${col.c};background:${col.bg}">${esc(e.category||"Other")}</span>
-            ${isMacro(e.category)?'<span class="macro">Macro</span>':""}
-            ${e.tickers?ticks(e.tickers):""}
-          </div>
-          ${details.length?`<div class="detail">${details.join("")}</div>`:""}
-        </div>
-        ${e.status?`<span class="imp st-${esc(e.status)}">${esc(e.status)}</span>`:"<span></span>"}
-      </div>`;
-    });
-    html+=`</div>`;
-  });
-  box.innerHTML=html;
+  box.innerHTML = selectedDay ? renderDayDetail(selectedDay) : renderWeekOverview();
+}
+function renderWeekBar(){
+  const days=[...Array(7)].map((_,i)=>addDays(weekStart,i));
+  const t=iso(today0()), a=weekStart, b=addDays(weekStart,6);
+  const range = a.getMonth()===b.getMonth()
+    ? `${MO[a.getMonth()]} ${a.getDate()}–${b.getDate()}, ${a.getFullYear()}`
+    : `${MO[a.getMonth()]} ${a.getDate()} – ${MO[b.getMonth()]} ${b.getDate()}, ${b.getFullYear()}`;
+  const tabs=days.map((d,i)=>{
+    const ds=iso(d), n=VIEW.filter(e=>e.date===ds).length;
+    const cls=[selectedDay===ds?"sel":"", ds===t?"today":"", i>=5?"wknd":""].filter(Boolean).join(" ");
+    return `<button class="daytab ${cls}" data-day="${ds}">
+      <span class="dt-wd">${WDS[i]}</span><span class="dt-dt">${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}</span>
+      ${n?`<span class="dt-n">${n}</span>`:""}</button>`;
+  }).join("");
+  document.getElementById("weekbar").innerHTML=`
+    <div class="wb-top">
+      <div class="wb-month">${range}</div>
+      <div class="wb-actions">
+        ${selectedDay?`<button class="wb-btn" data-act="week">◱ Week view</button>`:""}
+        <button class="wb-btn" data-act="today">● Today</button>
+      </div>
+    </div>
+    <div class="wb-strip">
+      <button class="wb-nav" data-act="prev" title="Previous week">‹</button>
+      <div class="wb-days">${tabs}</div>
+      <button class="wb-nav" data-act="next" title="Next week">›</button>
+    </div>`;
+}
+function renderWeekOverview(){
+  const days=[...Array(7)].map((_,i)=>addDays(weekStart,i));
+  const t=iso(today0());
+  const cols=days.map((d,i)=>{
+    const ds=iso(d);
+    const evs=VIEW.filter(e=>e.date===ds).sort((x,y)=>mins(x)-mins(y));
+    const body = evs.length ? evs.map(e=>{
+      const col=catColor(e.category), tm=e.timeET||sessLabel(e.session);
+      return `<div class="ov-item" data-day="${ds}" style="border-left-color:${col.edge}">
+        <span class="ov-t">${esc(tm||"·")}</span><span class="ov-e">${esc(e.event)}</span>
+        ${isMacro(e.category)?'<span class="ov-macro">M</span>':""}</div>`;
+    }).join("") : `<div class="ov-empty">—</div>`;
+    return `<div class="ov-col ${ds===t?"today":""} ${i>=5?"wknd":""}" data-day="${ds}">
+      <div class="ov-head"><span class="ov-wd">${WDL[i]}</span><span class="ov-dt">${MO[d.getMonth()]} ${d.getDate()}</span></div>
+      <div class="ov-body">${body}</div></div>`;
+  }).join("");
+  return `<div class="overview">${cols}</div>`;
+}
+function renderDayDetail(ds){
+  const d=parseD(ds), evs=VIEW.filter(e=>e.date===ds), cd=countdown(ds);
+  const head=`<div class="dd-head"><div><span class="dd-wd">${WD[d.getDay()]}</span> <span class="dd-date">${prettyDate(ds)}</span></div><span class="cd ${cd.cls}">${cd.t}</span></div>`;
+  if(!evs.length) return head+`<div class="empty">No events on this day.<br><span style="font-size:12px">Use ‹ › to browse weeks, or “Week view” for the overview.</span></div>`;
+  const bt=(a,b)=>mins(a)-mins(b);
+  const macro=evs.filter(e=>isMacro(e.category)).sort(bt);
+  const earn=evs.filter(e=>isEarnings(e.category));
+  const pre=earn.filter(e=>mins(e)<720).sort(bt);
+  const post=earn.filter(e=>mins(e)>=720).sort(bt);
+  const other=evs.filter(e=>!isMacro(e.category)&&!isEarnings(e.category)).sort(bt);
+  return head + ddSection("Economic Data &amp; Fed",macro) + ddSection("US Earnings — Pre-market",pre)
+    + ddSection("US Earnings — After close",post) + ddSection("Other",other);
+}
+function ddSection(title,list){
+  if(!list.length) return "";
+  const rows=list.map(e=>{
+    const col=catColor(e.category);
+    const tm=e.timeET?esc(e.timeET):(e.session?esc(sessLabel(e.session)):"—");
+    return `<tr>
+      <td class="c-time">${tm}</td>
+      <td class="c-ev">${esc(e.event)}${isMacro(e.category)?' <span class="macro">Macro</span>':""}</td>
+      <td><span class="pill" style="color:${col.c};background:${col.bg}">${esc(e.category||"Other")}</span></td>
+      <td>${e.status?`<span class="imp st-${esc(e.status)}">${esc(e.status)}</span>`:"—"}</td>
+      <td class="c-x">${esc(e.expected)||"—"}</td>
+      <td class="c-x">${esc(e.actual)||"—"}</td>
+      <td class="c-x">${esc(e.reaction)||"—"}</td>
+      <td class="c-note">${esc(e.notes)||"—"}</td>
+    </tr>`;
+  }).join("");
+  return `<div class="dd-sec"><div class="dd-sectitle">${title}<span class="dd-cnt">${list.length}</span></div>
+    <div class="tblwrap"><table class="dd-tbl">
+    <thead><tr><th>Time (ET)</th><th>Event</th><th>Category</th><th>Status</th><th>Expected</th><th>Actual</th><th>Reaction</th><th>Notes</th></tr></thead>
+    <tbody>${rows}</tbody></table></div></div>`;
 }
 
 /* ---------------- boot ---------------- */
@@ -373,13 +679,28 @@ async function boot(){
 }
 ["input","change"].forEach(ev=>{
   document.addEventListener(ev,e=>{
-    if(["q","catSel","statusSel","upcomingOnly"].includes(e.target.id)) render();
+    if(["q","catSel","statusSel"].includes(e.target.id)){ selectedDay=null; render(); }
   });
+});
+document.getElementById("weekbar").addEventListener("click",e=>{
+  const act=e.target.closest("[data-act]"), day=e.target.closest("[data-day]");
+  if(act){
+    const a=act.dataset.act;
+    if(a==="prev"){ weekStart=addDays(weekStart,-7); selectedDay=null; }
+    else if(a==="next"){ weekStart=addDays(weekStart,7); selectedDay=null; }
+    else if(a==="today"){ initWeek(); }
+    else if(a==="week"){ selectedDay=null; }
+    render();
+  } else if(day){ selectedDay=day.dataset.day; weekStart=mondayOf(parseD(selectedDay)); render(); }
+});
+document.getElementById("list").addEventListener("click",e=>{
+  const day=e.target.closest("[data-day]");
+  if(day){ selectedDay=day.dataset.day; render(); }
 });
 document.getElementById("refreshBtn").onclick=boot;
 document.getElementById("fileInput").onchange=e=>{ if(e.target.files[0]) loadFile(e.target.files[0]); };
 document.getElementById("footer").innerHTML=
-  "Tide Front Capital — internal event tracker. Edit the shared Excel on OneDrive; this page reflects the latest saved version on refresh. "+
+  "Tide Front Capital — internal event tracker. Default view is the week; click any day for the full list, and use ‹ › to change week. Edit the shared Excel on OneDrive; this page reflects the latest saved version on refresh. "+
   "Macro events (Fed / Rates, Economic Data) are tagged “Macro”. Dates from the Fed FOMC calendar, company IR sites (earnings + call times) and the BEA; items marked “Wait” still need confirmation.";
 boot();
 </script>
