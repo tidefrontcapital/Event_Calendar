@@ -123,12 +123,12 @@ function ensureXLSX(){
   return _xlsxPromise;
 }
 /* ============================================================
-   DATA SOURCE
-   Paste the OneDrive *direct download* link between the quotes
-   below to make this page read the live shared Excel file.
-   Leave empty to show the bundled sample data.
+   DATA SOURCE — live shared Excel on OneDrive.
+   Built from the file's "anyone can view" share link via the
+   OneDrive shares API (returns the .xlsx bytes with CORS).
+   Set to "" to fall back to the bundled snapshot below.
    ============================================================ */
-const DATA_URL = "";
+const DATA_URL = "https://api.onedrive.com/v1.0/shares/u!aHR0cHM6Ly8xZHJ2Lm1zL3gvYy80ZjBlOTAyZGViY2IxODExL0lRQThRNkxFeGl5WlI2U1hJSXpDX29rWEFTVGNpcE9NOEZlZWxTTjJrelpzMmgwP2U9N3QwYksx/root/content";
 
 /* Bundled fallback = snapshot of the Excel at build time (matches the "Events" sheet). */
 const SAMPLE = [
@@ -355,9 +355,9 @@ async function boot(){
     try{
       EVENTS = await loadLive(DATA_URL);
       const stamp=new Date().toLocaleString();
-      setSrc("live", `<span class="live"></span>Live from OneDrive · updated ${stamp}`);
+      setSrc("live", `Live from OneDrive · updated ${stamp}`);
       buildCats(); render(); return;
-    }catch(err){ bootSample(`Live load failed (${err.message}). `); return; }
+    }catch(err){ bootSample(`Couldn't load live data (${err.message}) — showing last bundled copy. `); return; }
   }
   bootSample("");
 }
