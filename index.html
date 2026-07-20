@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tide Front Capital — Event Calendar</title>
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#121821; --panel2:#0f141c; --line:#1f2937; --muted:#8b9bb0;
+    --text:#e7edf5; --accent:#3ba776; --accent2:#4f8cff; --red:#e5544b; --green:#2ecc8f;
+    --chip:#1b2430; --gold:#d8a657; --purple:#a78bfa; --teal:#43c6c0;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--accent2)}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;letter-spacing:.5px}
+  .brand h1{font-size:19px;margin:0;letter-spacing:.3px}
+  .brand .sub{color:var(--muted);font-size:12px}
+  .src{color:var(--muted);font-size:12px;text-align:right;max-width:340px}
+  .src .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+  .src .live{background:var(--green)} .src .sample{background:var(--gold)} .src .err{background:var(--red)}
+  .src button, .filebtn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:5px 10px;font:inherit;font-size:12px;cursor:pointer;margin-left:6px}
+  .src button:hover,.filebtn:hover{border-color:var(--accent2)}
+
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:18px 0}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0}
+  .kpi .label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.6px}
+  .kpi .val{font-size:22px;font-weight:700;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .kpi .val.small{font-size:15px}
+  .kpi .sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+  .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}
+  select,input[type=search]{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px;font:inherit}
+  input[type=search]{min-width:200px;flex:1}
+  .chk{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;user-select:none;cursor:pointer}
+
+  .daygroup{margin:22px 0 0}
+  .dayhead{display:flex;align-items:baseline;gap:10px;margin:0 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+  .dayhead .d{font-size:15px;font-weight:800;letter-spacing:.2px}
+  .dayhead .wd{color:var(--muted);font-size:12px;font-weight:600}
+  .dayhead .cd{margin-left:auto;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:var(--chip);border:1px solid var(--line);color:var(--muted)}
+  .cd.today{background:#10331f;color:#56d39a;border-color:#1c5738}
+  .cd.soon{background:#0f2a3d;color:#6cb6ff;border-color:#1c405a}
+  .cd.past{opacity:.6}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-left-width:3px;border-radius:11px;padding:12px 14px;margin:8px 0;display:grid;grid-template-columns:66px 1fr auto;gap:12px;align-items:start}
+  .card .time{font-size:12px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}
+  .card .body{min-width:0}
+  .card .title{font-size:14px;font-weight:700;margin:0 0 4px}
+  .card .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:4px}
+  .card .detail{font-size:12.5px;color:var(--muted);margin-top:5px;display:flex;flex-wrap:wrap;gap:4px 16px}
+  .card .detail b{color:var(--text);font-weight:600}
+  .tick{font-size:11px;font-weight:700;color:#cdd8e6;background:var(--chip);border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-variant-numeric:tabular-nums}
+  .pill{display:inline-block;padding:2px 9px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+  .imp{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase}
+  .st-Confirmed{background:#10331f;color:#56d39a} .st-Wait{background:#3a2a12;color:#e6b25a}
+  .macro{display:inline-block;padding:1px 7px;border-radius:5px;font-size:9.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;background:#0f2a3d;color:#6cb6ff;border:1px solid #1c405a;vertical-align:middle}
+  .card .time .et{color:var(--text);font-weight:800} .card .time .sess{display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:1px}
+
+  .empty{text-align:center;color:var(--muted);padding:50px 20px;border:1px dashed var(--line);border-radius:12px;margin-top:20px}
+  footer{color:var(--muted);font-size:11.5px;margin-top:34px;border-top:1px solid var(--line);padding-top:14px;line-height:1.7}
+
+  @media (max-width:720px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .card{grid-template-columns:56px 1fr;}
+    .card .imp{grid-column:2;justify-self:start;margin-top:2px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">TF</div>
+      <div>
+        <h1>Tide Front Capital</h1>
+        <div class="sub">Market Event Calendar</div>
+      </div>
+    </div>
+    <div class="src" id="srcBox">
+      <div><span class="dot sample"></span><span id="srcText">Loading…</span></div>
+      <div style="margin-top:6px">
+        <button id="refreshBtn" title="Reload data">↻ Refresh</button>
+        <label class="filebtn" title="Open a local .xlsx">📂 Open file<input id="fileInput" type="file" accept=".xlsx" hidden></label>
+      </div>
+    </div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="controls">
+    <input type="search" id="q" placeholder="Search event, ticker, note…">
+    <select id="catSel"><option value="">All categories</option></select>
+    <select id="statusSel">
+      <option value="">All status</option>
+      <option>Confirmed</option><option>Wait</option>
+    </select>
+    <label class="chk"><input type="checkbox" id="upcomingOnly"> Upcoming only</label>
+  </div>
+
+  <div id="list"></div>
+
+  <footer id="footer"></footer>
+</div>
+
+<script>
+/* SheetJS is loaded lazily — only when we actually read an .xlsx (live OneDrive link
+   or a local file). This keeps the initial page fully self-contained and fast. */
+let _xlsxPromise = null;
+function ensureXLSX(){
+  if(window.XLSX) return Promise.resolve();
+  if(_xlsxPromise) return _xlsxPromise;
+  _xlsxPromise = new Promise((resolve,reject)=>{
+    const s=document.createElement("script");
+    s.src="https://cdn.jsdelivr.net/npm/xlsx@0.20.3/dist/xlsx.full.min.js";
+    s.onload=()=>resolve();
+    s.onerror=()=>reject(new Error("could not load spreadsheet reader"));
+    document.head.appendChild(s);
+  });
+  return _xlsxPromise;
+}
+/* ============================================================
+   DATA SOURCE
+   Paste the OneDrive *direct download* link between the quotes
+   below to make this page read the live shared Excel file.
+   Leave empty to show the bundled sample data.
+   ============================================================ */
+const DATA_URL = "";
+
+/* Bundled fallback = snapshot of the Excel at build time (matches the "Events" sheet). */
+const SAMPLE = [
+  {date:"2026-07-22", session:"AMC",  timeET:"",        status:"Confirmed", event:"GOOGL",              category:"Earnings",      tickers:"", notes:"Alphabet Q2 — AI cloud/ads vs capex"},
+  {date:"2026-07-22", session:"Call", timeET:"4:30 PM", status:"Confirmed", event:"GOOGL cc",           category:"Earnings",      tickers:"", notes:"Earnings call 1:30pm PT (abc.xyz/investor)"},
+  {date:"2026-07-23", session:"AMC",  timeET:"",        status:"Confirmed", event:"INTC",               category:"Earnings",      tickers:"", notes:"Intel Q2"},
+  {date:"2026-07-23", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"INTC cc",            category:"Earnings",      tickers:"", notes:"Earnings call 2:00pm PT (intc.com)"},
+  {date:"2026-07-28", session:"",     timeET:"",        status:"Confirmed", event:"FOMC meeting (Day 1)",category:"Fed / Rates",   tickers:"", notes:"Two-day meeting; no SEP this meeting"},
+  {date:"2026-07-29", session:"",     timeET:"2:00 PM", status:"Confirmed", event:"FOMC rate decision",  category:"Fed / Rates",   tickers:"", notes:"Decision 2:00pm ET; press conf. 2:30pm ET"},
+  {date:"2026-07-29", session:"AMC",  timeET:"",        status:"Confirmed", event:"MSFT",               category:"Earnings",      tickers:"", notes:"Microsoft FY26 Q4 — same day as FOMC"},
+  {date:"2026-07-29", session:"Call", timeET:"5:30 PM", status:"Confirmed", event:"MSFT cc",            category:"Earnings",      tickers:"", notes:"Earnings call 2:30pm PT (microsoft.com/investor)"},
+  {date:"2026-07-29", session:"AMC",  timeET:"",        status:"Confirmed", event:"META",               category:"Earnings",      tickers:"", notes:"Meta Q2"},
+  {date:"2026-07-29", session:"Call", timeET:"4:30 PM", status:"Confirmed", event:"META cc",            category:"Earnings",      tickers:"", notes:"Earnings call 1:30pm PT"},
+  {date:"2026-07-30", session:"",     timeET:"8:30 AM", status:"Confirmed", event:"Q2 GDP (advance)",    category:"Economic Data", tickers:"", notes:"BEA release 8:30am ET"},
+  {date:"2026-07-30", session:"AMC",  timeET:"",        status:"Confirmed", event:"AAPL",               category:"Earnings",      tickers:"", notes:"Apple FY26 Q3"},
+  {date:"2026-07-30", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AAPL cc",            category:"Earnings",      tickers:"", notes:"Earnings call 2:00pm PT"},
+  {date:"2026-07-30", session:"AMC",  timeET:"",        status:"Confirmed", event:"AMZN",               category:"Earnings",      tickers:"", notes:"Amazon Q2"},
+  {date:"2026-07-30", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AMZN cc",            category:"Earnings",      tickers:"", notes:"Earnings call 2:00pm PT"},
+  {date:"2026-07-31", session:"",     timeET:"8:30 AM", status:"Wait",      event:"June PCE inflation",  category:"Economic Data", tickers:"", notes:"Fed's preferred gauge (BEA PI&O). Confirm date: 7/30 or 7/31"},
+];
+
+const CAT_COLORS = {
+  "Fed / Rates":        {c:"#e6b25a", bg:"#3a2a12", edge:"#d8a657"},
+  "Economic Data":      {c:"#6cb6ff", bg:"#0f2a3d", edge:"#4f8cff"},
+  "Earnings":           {c:"#56d39a", bg:"#10331f", edge:"#3ba776"},
+  "Options Mechanics":  {c:"#c4b5fd", bg:"#241f3a", edge:"#a78bfa"},
+  "Geopolitics / Policy":{c:"#f08a8a", bg:"#3a1620", edge:"#e5544b"},
+  "Corporate Action":   {c:"#5fd0c8", bg:"#0f302e", edge:"#43c6c0"},
+  "Other":              {c:"#9fb0c4", bg:"#1b2430", edge:"#8b9bb0"},
+};
+const catColor = c => CAT_COLORS[c] || CAT_COLORS["Other"];
+
+let EVENTS = [];
+
+/* ---------------- data loading ---------------- */
+function normalize(rows){
+  // rows = array of objects keyed by header text from the Excel "Events" sheet
+  const pick = (o, names) => { for(const n of names){ for(const k in o){ if(k.trim().toLowerCase()===n){ return (o[k]??"").toString().trim(); } } } return ""; };
+  return rows.map(o=>({
+    date:      fmtDate(pick(o,["event date","date"])),
+    status:    pick(o,["status"]),
+    session:   pick(o,["time / session","session"]),
+    timeET:    pick(o,["time (et)","time et","time"]),
+    event:     pick(o,["event","name"]),
+    category:  pick(o,["category"]),
+    tickers:   pick(o,["affected tickers","tickers","ticker"]),
+    expected:  pick(o,["expected"]),
+    actual:    pick(o,["actual / result","actual","result"]),
+    reaction:  pick(o,["market reaction","reaction"]),
+    notes:     pick(o,["notes","note"]),
+  })).filter(e=>e.event && e.date);
+}
+function fmtDate(v){
+  if(!v) return "";
+  // Excel serial number?
+  if(/^\d+(\.\d+)?$/.test(v)){
+    const d = new Date(Date.UTC(1899,11,30) + Number(v)*86400000);
+    return d.toISOString().slice(0,10);
+  }
+  const d = new Date(v);
+  if(!isNaN(d)) return d.toISOString().slice(0,10);
+  return v;
+}
+async function loadLive(url){
+  await ensureXLSX();
+  const res = await fetch(url);
+  if(!res.ok) throw new Error("HTTP "+res.status);
+  const buf = await res.arrayBuffer();
+  const wb = XLSX.read(buf, {type:"array"});
+  const sheet = wb.Sheets["Events"] || wb.Sheets[wb.SheetNames[0]];
+  const rows = XLSX.utils.sheet_to_json(sheet, {defval:""});
+  return normalize(rows);
+}
+function loadFile(file){
+  const reader = new FileReader();
+  reader.onload = async e=>{
+    try{
+      await ensureXLSX();
+      const wb = XLSX.read(e.target.result, {type:"array"});
+      const sheet = wb.Sheets["Events"] || wb.Sheets[wb.SheetNames[0]];
+      EVENTS = normalize(XLSX.utils.sheet_to_json(sheet,{defval:""}));
+      setSrc("live", "Loaded from file: "+file.name);
+      buildCats(); render();
+    }catch(err){ setSrc("err","Could not read file: "+err.message); }
+  };
+  reader.readAsArrayBuffer(file);
+}
+function setSrc(kind, text){
+  const dot = {live:"live",sample:"sample",err:"err"}[kind]||"sample";
+  document.getElementById("srcText").innerHTML = text;
+  document.querySelector("#srcBox .dot").className = "dot "+dot;
+}
+
+/* ---------------- date helpers ---------------- */
+function today0(){ const d=new Date(); d.setHours(0,0,0,0); return d; }
+function parseD(s){ const p=s.split("-"); return new Date(+p[0],+p[1]-1,+p[2]); }
+function daysBetween(a,b){ return Math.round((a-b)/86400000); }
+function countdown(dateStr){
+  const n = daysBetween(parseD(dateStr), today0());
+  if(n===0) return {t:"Today", cls:"today"};
+  if(n===1) return {t:"Tomorrow", cls:"soon"};
+  if(n>1 && n<=7) return {t:"in "+n+" days", cls:"soon"};
+  if(n>7) return {t:"in "+n+" days", cls:""};
+  if(n===-1) return {t:"Yesterday", cls:"past"};
+  return {t:Math.abs(n)+" days ago", cls:"past"};
+}
+const WD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const MO=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function prettyDate(s){ const d=parseD(s); return `${MO[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`; }
+
+/* ---------------- UI ---------------- */
+function buildCats(){
+  const sel=document.getElementById("catSel");
+  const cats=[...new Set(EVENTS.map(e=>e.category).filter(Boolean))].sort();
+  sel.innerHTML='<option value="">All categories</option>'+cats.map(c=>`<option>${c}</option>`).join("");
+}
+function currentFilters(){
+  return {
+    q: document.getElementById("q").value.trim().toLowerCase(),
+    cat: document.getElementById("catSel").value,
+    imp: document.getElementById("impSel").value,
+    up: document.getElementById("upcomingOnly").checked,
+  };
+}
+function applyFilters(list){
+  const f=currentFilters(); const t0=today0();
+  return list.filter(e=>{
+    if(f.cat && e.category!==f.cat) return false;
+    if(f.imp && e.importance!==f.imp) return false;
+    if(f.up && daysBetween(parseD(e.date),t0)<0) return false;
+    if(f.q){
+      const hay=(e.event+" "+e.tickers+" "+e.notes+" "+e.category+" "+e.reaction+" "+e.expected+" "+e.actual).toLowerCase();
+      if(!hay.includes(f.q)) return false;
+    }
+    return true;
+  });
+}
+function renderKpis(all){
+  const t0=today0();
+  const upcoming=all.filter(e=>daysBetween(parseD(e.date),t0)>=0).sort((a,b)=>a.date.localeCompare(b.date));
+  const next=upcoming[0];
+  const nextCd = next?countdown(next.date):null;
+  const highN=upcoming.filter(e=>e.importance==="High").length;
+  const earnN=upcoming.filter(e=>e.category==="Earnings").length;
+  const dates=all.map(e=>e.date).sort();
+  const span = dates.length?`${prettyDate(dates[0])} – ${prettyDate(dates[dates.length-1])}`:"—";
+  const tiles=[
+    {label:"Events tracked", val:all.length, sub:`${upcoming.length} upcoming`},
+    {label:"Next event", val: next?next.event:"—", cls:"small", sub: next?`${nextCd.t} · ${prettyDate(next.date)}`:""},
+    {label:"High importance", val:highN, sub:"upcoming"},
+    {label:"Earnings", val:earnN, sub:"upcoming"},
+    {label:"Coverage", val:span, cls:"small", sub:`${dates.length} dated`},
+  ];
+  document.getElementById("kpis").innerHTML = tiles.map(t=>`
+    <div class="kpi"><div class="label">${t.label}</div>
+    <div class="val ${t.cls||''}">${t.val}</div>
+    ${t.sub?`<div class="sub">${t.sub}</div>`:''}</div>`).join("");
+}
+function esc(s){ return (s||"").replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m])); }
+function ticks(s){ return s.split(",").map(x=>x.trim()).filter(Boolean).map(x=>`<span class="tick">${esc(x)}</span>`).join(" "); }
+
+function render(){
+  renderKpis(EVENTS);
+  const list=applyFilters(EVENTS).sort((a,b)=> a.date.localeCompare(b.date) || String(a.time).localeCompare(String(b.time)));
+  const box=document.getElementById("list");
+  if(!list.length){ box.innerHTML='<div class="empty">No events match your filters.</div>'; return; }
+  const groups={}; list.forEach(e=>{ (groups[e.date]=groups[e.date]||[]).push(e); });
+  let html="";
+  Object.keys(groups).sort().forEach(date=>{
+    const d=parseD(date), cd=countdown(date);
+    html+=`<div class="daygroup"><div class="dayhead">
+      <span class="d">${prettyDate(date)}</span>
+      <span class="wd">${WD[d.getDay()]}</span>
+      <span class="cd ${cd.cls}">${cd.t}</span></div>`;
+    groups[date].forEach(e=>{
+      const col=catColor(e.category);
+      const details=[];
+      if(e.expected) details.push(`<span><b>Expected:</b> ${esc(e.expected)}</span>`);
+      if(e.actual)   details.push(`<span><b>Actual:</b> ${esc(e.actual)}</span>`);
+      if(e.reaction) details.push(`<span><b>Reaction:</b> ${esc(e.reaction)}</span>`);
+      if(e.notes)    details.push(`<span>${esc(e.notes)}</span>`);
+      html+=`<div class="card" style="border-left-color:${col.edge}">
+        <div class="time">${esc(e.time||"")}</div>
+        <div class="body">
+          <div class="title">${esc(e.event)}</div>
+          <div class="meta">
+            <span class="pill" style="color:${col.c};background:${col.bg}">${esc(e.category||"Other")}</span>
+            ${e.tickers?ticks(e.tickers):""}
+          </div>
+          ${details.length?`<div class="detail">${details.join("")}</div>`:""}
+        </div>
+        ${e.importance?`<span class="imp imp-${esc(e.importance)}">${esc(e.importance)}</span>`:"<span></span>"}
+      </div>`;
+    });
+    html+=`</div>`;
+  });
+  box.innerHTML=html;
+}
+
+/* ---------------- boot ---------------- */
+function bootSample(msg){
+  EVENTS=SAMPLE.slice();
+  setSrc("sample", (msg||"")+"Showing bundled sample · connect OneDrive to go live");
+  buildCats(); render();
+}
+async function boot(){
+  if(DATA_URL){
+    try{
+      EVENTS = await loadLive(DATA_URL);
+      const stamp=new Date().toLocaleString();
+      setSrc("live", `<span class="live"></span>Live from OneDrive · updated ${stamp}`);
+      buildCats(); render(); return;
+    }catch(err){ bootSample(`Live load failed (${err.message}). `); return; }
+  }
+  bootSample("");
+}
+["input","change"].forEach(ev=>{
+  document.addEventListener(ev,e=>{
+    if(["q","catSel","impSel","upcomingOnly"].includes(e.target.id)) render();
+  });
+});
+document.getElementById("refreshBtn").onclick=boot;
+document.getElementById("fileInput").onchange=e=>{ if(e.target.files[0]) loadFile(e.target.files[0]); };
+document.getElementById("footer").innerHTML=
+  "Tide Front Capital — internal event tracker. Edit the shared Excel on OneDrive; this page reflects the latest saved version on refresh. "+
+  "Prefilled macro/earnings dates from the Fed FOMC calendar and reported earnings dates; items marked “Verify” need confirmation.";
+boot();
+</script>
+</body>
+</html>
