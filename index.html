@@ -249,7 +249,7 @@ function currentFilters(){
   return {
     q: document.getElementById("q").value.trim().toLowerCase(),
     cat: document.getElementById("catSel").value,
-    imp: document.getElementById("impSel").value,
+    status: document.getElementById("statusSel").value,
     up: document.getElementById("upcomingOnly").checked,
   };
 }
@@ -257,7 +257,7 @@ function applyFilters(list){
   const f=currentFilters(); const t0=today0();
   return list.filter(e=>{
     if(f.cat && e.category!==f.cat) return false;
-    if(f.imp && e.importance!==f.imp) return false;
+    if(f.status && e.status!==f.status) return false;
     if(f.up && daysBetween(parseD(e.date),t0)<0) return false;
     if(f.q){
       const hay=(e.event+" "+e.tickers+" "+e.notes+" "+e.category+" "+e.reaction+" "+e.expected+" "+e.actual).toLowerCase();
@@ -271,15 +271,16 @@ function renderKpis(all){
   const upcoming=all.filter(e=>daysBetween(parseD(e.date),t0)>=0).sort((a,b)=>a.date.localeCompare(b.date));
   const next=upcoming[0];
   const nextCd = next?countdown(next.date):null;
-  const highN=upcoming.filter(e=>e.importance==="High").length;
-  const earnN=upcoming.filter(e=>e.category==="Earnings").length;
+  const confN=upcoming.filter(e=>e.status==="Confirmed").length;
+  const waitN=upcoming.filter(e=>e.status==="Wait").length;
+  const earnN=upcoming.filter(e=>e.category==="Earnings" && !isCC(e)).length;
   const dates=all.map(e=>e.date).sort();
   const span = dates.length?`${prettyDate(dates[0])} – ${prettyDate(dates[dates.length-1])}`:"—";
   const tiles=[
     {label:"Events tracked", val:all.length, sub:`${upcoming.length} upcoming`},
     {label:"Next event", val: next?next.event:"—", cls:"small", sub: next?`${nextCd.t} · ${prettyDate(next.date)}`:""},
-    {label:"High importance", val:highN, sub:"upcoming"},
-    {label:"Earnings", val:earnN, sub:"upcoming"},
+    {label:"Confirmed", val:confN, sub: waitN?`${waitN} awaiting`:"all set"},
+    {label:"Companies reporting", val:earnN, sub:"upcoming"},
     {label:"Coverage", val:span, cls:"small", sub:`${dates.length} dated`},
   ];
   document.getElementById("kpis").innerHTML = tiles.map(t=>`
@@ -289,10 +290,21 @@ function renderKpis(all){
 }
 function esc(s){ return (s||"").replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m])); }
 function ticks(s){ return s.split(",").map(x=>x.trim()).filter(Boolean).map(x=>`<span class="tick">${esc(x)}</span>`).join(" "); }
+const isCC = e => /\scc$/i.test((e.event||"").trim());
+const isMacro = c => c==="Fed / Rates" || c==="Economic Data";
+function mins(e){                     // minutes-since-midnight for chronological sort
+  const m=(e.timeET||"").match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if(m){ let h=(+m[1])%12; if(/pm/i.test(m[3])) h+=12; return h*60 + (+m[2]); }
+  const s=(e.session||"").toUpperCase();
+  if(s==="BMO")  return 8*60;         // before open
+  if(s==="AMC")  return 16*60+5;      // after close ~4:05pm (report lands before its call)
+  if(s==="CALL") return 16*60+30;
+  return 99999;                        // no time -> end of that day
+}
 
 function render(){
   renderKpis(EVENTS);
-  const list=applyFilters(EVENTS).sort((a,b)=> a.date.localeCompare(b.date) || String(a.time).localeCompare(String(b.time)));
+  const list=applyFilters(EVENTS).sort((a,b)=> a.date.localeCompare(b.date) || mins(a)-mins(b));
   const box=document.getElementById("list");
   if(!list.length){ box.innerHTML='<div class="empty">No events match your filters.</div>'; return; }
   const groups={}; list.forEach(e=>{ (groups[e.date]=groups[e.date]||[]).push(e); });
@@ -310,17 +322,21 @@ function render(){
       if(e.actual)   details.push(`<span><b>Actual:</b> ${esc(e.actual)}</span>`);
       if(e.reaction) details.push(`<span><b>Reaction:</b> ${esc(e.reaction)}</span>`);
       if(e.notes)    details.push(`<span>${esc(e.notes)}</span>`);
+      const timeCell = e.timeET
+        ? `<span class="et">${esc(e.timeET)}</span>${e.session?`<span class="sess">${esc(e.session)}</span>`:""}`
+        : (e.session?`<span class="et">${esc(e.session)}</span>`:"");
       html+=`<div class="card" style="border-left-color:${col.edge}">
-        <div class="time">${esc(e.time||"")}</div>
+        <div class="time">${timeCell}</div>
         <div class="body">
           <div class="title">${esc(e.event)}</div>
           <div class="meta">
             <span class="pill" style="color:${col.c};background:${col.bg}">${esc(e.category||"Other")}</span>
+            ${isMacro(e.category)?'<span class="macro">Macro</span>':""}
             ${e.tickers?ticks(e.tickers):""}
           </div>
           ${details.length?`<div class="detail">${details.join("")}</div>`:""}
         </div>
-        ${e.importance?`<span class="imp imp-${esc(e.importance)}">${esc(e.importance)}</span>`:"<span></span>"}
+        ${e.status?`<span class="imp st-${esc(e.status)}">${esc(e.status)}</span>`:"<span></span>"}
       </div>`;
     });
     html+=`</div>`;
@@ -347,14 +363,14 @@ async function boot(){
 }
 ["input","change"].forEach(ev=>{
   document.addEventListener(ev,e=>{
-    if(["q","catSel","impSel","upcomingOnly"].includes(e.target.id)) render();
+    if(["q","catSel","statusSel","upcomingOnly"].includes(e.target.id)) render();
   });
 });
 document.getElementById("refreshBtn").onclick=boot;
 document.getElementById("fileInput").onchange=e=>{ if(e.target.files[0]) loadFile(e.target.files[0]); };
 document.getElementById("footer").innerHTML=
   "Tide Front Capital — internal event tracker. Edit the shared Excel on OneDrive; this page reflects the latest saved version on refresh. "+
-  "Prefilled macro/earnings dates from the Fed FOMC calendar and reported earnings dates; items marked “Verify” need confirmation.";
+  "Macro events (Fed / Rates, Economic Data) are tagged “Macro”. Dates from the Fed FOMC calendar, company IR sites (earnings + call times) and the BEA; items marked “Wait” still need confirmation.";
 boot();
 </script>
 </body>
