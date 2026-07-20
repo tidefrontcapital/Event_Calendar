@@ -132,27 +132,36 @@ const DATA_URL = "https://api.onedrive.com/v1.0/shares/u!aHR0cHM6Ly8xZHJ2Lm1zL3g
 
 /* Bundled fallback = snapshot of the Excel at build time (matches the "Events" sheet). */
 const SAMPLE = [
-  {date:"2026-07-22", session:"AMC",  timeET:"",        status:"Confirmed", event:"GOOGL",              category:"Earnings",      tickers:"", notes:"Alphabet Q2 — AI cloud/ads vs capex"},
-  {date:"2026-07-22", session:"Call", timeET:"4:30 PM", status:"Confirmed", event:"GOOGL cc",           category:"Earnings",      tickers:"", notes:"Earnings call 1:30pm PT (abc.xyz/investor)"},
-  {date:"2026-07-23", session:"AMC",  timeET:"",        status:"Confirmed", event:"INTC",               category:"Earnings",      tickers:"", notes:"Intel Q2"},
-  {date:"2026-07-23", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"INTC cc",            category:"Earnings",      tickers:"", notes:"Earnings call 2:00pm PT (intc.com)"},
+  {date:"2026-07-22", session:"AMC",  timeET:"",        status:"Confirmed", event:"GOOGL",              category:"E",      tickers:"", notes:"Alphabet Q2 — AI cloud/ads vs capex"},
+  {date:"2026-07-22", session:"Call", timeET:"4:30 PM", status:"Confirmed", event:"GOOGL cc",           category:"E",      tickers:"", notes:"Earnings call 1:30pm PT (abc.xyz/investor)"},
+  {date:"2026-07-23", session:"AMC",  timeET:"",        status:"Confirmed", event:"INTC",               category:"E",      tickers:"", notes:"Intel Q2"},
+  {date:"2026-07-23", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"INTC cc",            category:"E",      tickers:"", notes:"Earnings call 2:00pm PT (intc.com)"},
   {date:"2026-07-28", session:"",     timeET:"",        status:"Confirmed", event:"FOMC meeting (Day 1)",category:"Fed / Rates",   tickers:"", notes:"Two-day meeting; no SEP this meeting"},
   {date:"2026-07-29", session:"",     timeET:"2:00 PM", status:"Confirmed", event:"FOMC rate decision",  category:"Fed / Rates",   tickers:"", notes:"Decision 2:00pm ET; press conf. 2:30pm ET"},
-  {date:"2026-07-29", session:"AMC",  timeET:"",        status:"Confirmed", event:"MSFT",               category:"Earnings",      tickers:"", notes:"Microsoft FY26 Q4 — same day as FOMC"},
-  {date:"2026-07-29", session:"Call", timeET:"5:30 PM", status:"Confirmed", event:"MSFT cc",            category:"Earnings",      tickers:"", notes:"Earnings call 2:30pm PT (microsoft.com/investor)"},
-  {date:"2026-07-29", session:"AMC",  timeET:"",        status:"Confirmed", event:"META",               category:"Earnings",      tickers:"", notes:"Meta Q2"},
-  {date:"2026-07-29", session:"Call", timeET:"4:30 PM", status:"Confirmed", event:"META cc",            category:"Earnings",      tickers:"", notes:"Earnings call 1:30pm PT"},
+  {date:"2026-07-29", session:"AMC",  timeET:"",        status:"Confirmed", event:"MSFT",               category:"E",      tickers:"", notes:"Microsoft FY26 Q4 — same day as FOMC"},
+  {date:"2026-07-29", session:"Call", timeET:"5:30 PM", status:"Confirmed", event:"MSFT cc",            category:"E",      tickers:"", notes:"Earnings call 2:30pm PT (microsoft.com/investor)"},
+  {date:"2026-07-29", session:"AMC",  timeET:"",        status:"Confirmed", event:"META",               category:"E",      tickers:"", notes:"Meta Q2"},
+  {date:"2026-07-29", session:"Call", timeET:"4:30 PM", status:"Confirmed", event:"META cc",            category:"E",      tickers:"", notes:"Earnings call 1:30pm PT"},
   {date:"2026-07-30", session:"",     timeET:"8:30 AM", status:"Confirmed", event:"Q2 GDP (advance)",    category:"Economic Data", tickers:"", notes:"BEA release 8:30am ET"},
-  {date:"2026-07-30", session:"AMC",  timeET:"",        status:"Confirmed", event:"AAPL",               category:"Earnings",      tickers:"", notes:"Apple FY26 Q3"},
-  {date:"2026-07-30", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AAPL cc",            category:"Earnings",      tickers:"", notes:"Earnings call 2:00pm PT"},
-  {date:"2026-07-30", session:"AMC",  timeET:"",        status:"Confirmed", event:"AMZN",               category:"Earnings",      tickers:"", notes:"Amazon Q2"},
-  {date:"2026-07-30", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AMZN cc",            category:"Earnings",      tickers:"", notes:"Earnings call 2:00pm PT"},
+  {date:"2026-07-30", session:"AMC",  timeET:"",        status:"Confirmed", event:"AAPL",               category:"E",      tickers:"", notes:"Apple FY26 Q3"},
+  {date:"2026-07-30", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AAPL cc",            category:"E",      tickers:"", notes:"Earnings call 2:00pm PT"},
+  {date:"2026-07-30", session:"AMC",  timeET:"",        status:"Confirmed", event:"AMZN",               category:"E",      tickers:"", notes:"Amazon Q2"},
+  {date:"2026-07-30", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AMZN cc",            category:"E",      tickers:"", notes:"Earnings call 2:00pm PT"},
   {date:"2026-07-31", session:"",     timeET:"8:30 AM", status:"Wait",      event:"June PCE inflation",  category:"Economic Data", tickers:"", notes:"Fed's preferred gauge (BEA PI&O). Confirm date: 7/30 or 7/31"},
+  {date:"2026-08-03", session:"AMC",  timeET:"",        status:"Confirmed", event:"PLTR",               category:"E",             tickers:"", notes:"Palantir Q2. Call time TBD"},
+  {date:"2026-08-04", session:"AMC",  timeET:"",        status:"Confirmed", event:"AMD",                category:"E",             tickers:"", notes:"AMD Q2"},
+  {date:"2026-08-04", session:"Call", timeET:"5:00 PM", status:"Confirmed", event:"AMD cc",             category:"E",             tickers:"", notes:"Earnings call 2:00pm PT (ir.amd.com)"},
+  {date:"2026-08-05", session:"BMO",  timeET:"",        status:"Confirmed", event:"DIS",                category:"E",             tickers:"", notes:"Disney FQ3 - reports before open"},
+  {date:"2026-08-05", session:"Call", timeET:"8:30 AM", status:"Confirmed", event:"DIS cc",             category:"E",             tickers:"", notes:"Earnings call 8:30am ET (before open)"},
+  {date:"2026-08-07", session:"",     timeET:"8:30 AM", status:"Confirmed", event:"July Jobs Report (NFP)", category:"Economic Data", tickers:"", notes:"BLS Employment Situation, 8:30am ET"},
+  {date:"2026-08-12", session:"",     timeET:"8:30 AM", status:"Confirmed", event:"July CPI",            category:"Economic Data", tickers:"", notes:"BLS CPI, 8:30am ET"},
+  {date:"2026-08-13", session:"",     timeET:"8:30 AM", status:"Confirmed", event:"July PPI",            category:"Economic Data", tickers:"", notes:"BLS PPI, 8:30am ET"},
 ];
 
 const CAT_COLORS = {
   "Fed / Rates":        {c:"#e6b25a", bg:"#3a2a12", edge:"#d8a657"},
   "Economic Data":      {c:"#6cb6ff", bg:"#0f2a3d", edge:"#4f8cff"},
+  "E":                  {c:"#56d39a", bg:"#10331f", edge:"#3ba776"},
   "Earnings":           {c:"#56d39a", bg:"#10331f", edge:"#3ba776"},
   "Options Mechanics":  {c:"#c4b5fd", bg:"#241f3a", edge:"#a78bfa"},
   "Geopolitics / Policy":{c:"#f08a8a", bg:"#3a1620", edge:"#e5544b"},
@@ -273,7 +282,7 @@ function renderKpis(all){
   const nextCd = next?countdown(next.date):null;
   const confN=upcoming.filter(e=>e.status==="Confirmed").length;
   const waitN=upcoming.filter(e=>e.status==="Wait").length;
-  const earnN=upcoming.filter(e=>e.category==="Earnings" && !isCC(e)).length;
+  const earnN=upcoming.filter(e=>isEarnings(e.category) && !isCC(e)).length;
   const dates=all.map(e=>e.date).sort();
   const span = dates.length?`${prettyDate(dates[0])} – ${prettyDate(dates[dates.length-1])}`:"—";
   const tiles=[
@@ -291,6 +300,7 @@ function renderKpis(all){
 function esc(s){ return (s||"").replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m])); }
 function ticks(s){ return s.split(",").map(x=>x.trim()).filter(Boolean).map(x=>`<span class="tick">${esc(x)}</span>`).join(" "); }
 const isCC = e => /\scc$/i.test((e.event||"").trim());
+const isEarnings = c => { c=(c||"").trim(); return c==="E" || /earn/i.test(c); };
 const isMacro = c => c==="Fed / Rates" || c==="Economic Data";
 function mins(e){                     // minutes-since-midnight for chronological sort
   const m=(e.timeET||"").match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
